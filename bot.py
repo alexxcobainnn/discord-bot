@@ -130,13 +130,13 @@ class JoinView(discord.ui.View):
     else:
             discord_contact = "-"
 
-    await interaction.response.send_message(
+        await interaction.response.send_message(
            f"✅ Request diterima!\n\n"
            f"👤 Admin: {admin['name']}\n"
            f"📱 WhatsApp: {admin['phone']}\n"
            f"💬 Discord: <@{admin['discord_id']}>",
            ephemeral=True
-    )
+        )
 
 @bot.event
 async def on_ready():
