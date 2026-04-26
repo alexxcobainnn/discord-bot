@@ -125,18 +125,17 @@ class JoinView(discord.ui.View):
     # cek discord ada atau tidak
 
     if admin["discord_id"] and admin["discord_id"] != "-":
-           discord_contact = f"<@{admin['discord_id']}>"
-
+        discord_contact = f"<@{admin['discord_id']}>"
     else:
-            discord_contact = "-"
-
-        await interaction.response.send_message(
-           f"✅ Request diterima!\n\n"
-           f"👤 Admin: {admin['name']}\n"
-           f"📱 WhatsApp: {admin['phone']}\n"
-           f"💬 Discord: <@{admin['discord_id']}>",
-           ephemeral=True
-        )
+        discord_contact = "-"
+    
+    await interaction.response.send_message(
+        f"✅ Request diterima!\n\n"
+        f"👤 Admin: {admin['name']}\n"
+        f"📱 WhatsApp: {admin['phone']}\n"
+        f"💬 Discord: <@{admin['discord_id']}>",
+        ephemeral=True
+    )
 
 @bot.event
 async def on_ready():
