@@ -16,27 +16,85 @@ user_requests = {}
 COOLDOWN = 300  # detik (300 = 5 menit)
 
 admins = [
-    "Admin Sandra - 0821-1707-2500",
-    "Admin Irvan - 0852-2233-1721",
-    "Admin Ermy - 0822-6640-7499",
-    "Admin Aril - 0812-9776-6762",
-    "Admin Hakim - 0822-9835-9643",
-    "Admin Ruby - 0878-3517-3029",
-    "Admin Nadia - 0823-1082-2743",
-]
+    {
+        "name": "Sandra",
+        "phone": "0821-1707-2500",
+        "discord_id": 731083851371118592
+    },
+    {
+        "name": "Tasya",
+        "phone": "0881-5236-359",
+        "discord_id": 756324366345830451
+    },
+    {
+        "name": "Ermy Ulle",
+        "phone": "0822-6640-7499",
+        "discord_id": 1494516522973139086
+    },
+    {
+        "name": "Aril",
+        "phone": "0812-9776-6762",
+        "discord_id": 1494265944229417010
+    },
+    {
+        "name": "Hakim",
+        "phone": "0822-9835-9643",
+        "discord_id": 1308126117567139880
+    },
+    {
+        "name": "Ruby",
+        "phone": "0878-3517-3029",
+        "discord_id": 1494265093574103061
+    },
+    {
+        "name": "Nadia",
+        "phone": "0823-1082-2743",
+        "discord_id": 1497092030298456085
+    },
+    {
+        "name": "Dhisa",
+        "phone": "0878-6725-2352",
+        "discord_id": None
+    },
+    {
+        "name": "Monic",
+        "phone": "0819-9639-2737",
+        "discord_id": None
+    },
+    {
+        "name": "Nisa",
+        "phone": "0895-3841-70908",
+        "discord_id": 1497063750908252234
+    },
+    {
+        "name": "Nathalie",
+        "phone": "0823-3424-4616",
+        "discord_id": 1393896058987352145
+    },
+    {
+        "name": "Inka",
+        "phone": "0823-1904-8616",
+        "discord_id": 1497065966364917801
+    },
+    {
+        "name": "Alcerio",
+        "phone": "0821-1604-7806",
+        "discord_id": None
+    }
 
+
+]
 current_admin = 0
 
 def get_next_admin():
     global current_admin
     admin = admins[current_admin]
-    current_admin += 1
 
+    current_admin += 1
     if current_admin >= len(admins):
         current_admin = 0
 
     return admin
-
 class JoinView(discord.ui.View):
 
     @discord.ui.button(label="🚀 Hubungi Customer Service", style=discord.ButtonStyle.green)
@@ -64,10 +122,20 @@ class JoinView(discord.ui.View):
 
         admin = get_next_admin()
 
+	# cek discord ada atau tidak
+
+	if admin["discord_id"] and admin["discord_id"] != "-":
+   	    discord_contact = f"<@{admin['discord_id']}>"
+
+	else:
+    	    discord_contact = "-"
+
         await interaction.response.send_message(
-            f"✅ Request diterima!\n\n"
-            f"Silakan hubungi admin berikut:\n📱 {admin}",
-            ephemeral=True
+    	   f"✅ Request diterima!\n\n"
+   	   f"👤 Admin: {admin['name']}\n"
+    	   f"📱 WhatsApp: {admin['phone']}\n"
+    	   f"💬 Discord: <@{admin['discord_id']}>",
+    	   ephemeral=True
         )
 
 @bot.event
